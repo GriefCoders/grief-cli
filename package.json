@@ -1,0 +1,23 @@
+{
+  "name": "grief-cli",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "tsx src/index.ts",
+    "build": "tsc"
+  },
+  "keywords ": [],
+  "author": "Maxim Dementyev",
+  "license": "ISC",
+  "type": "commonjs",
+  "description": "",
+  "dependencies": {
+    "commander": "^13.1.0"
+  },
+  "devDependencies": {
+    "tsx": "^4.19.3",
+    "typescript": "^5.3.3"
+  },
+  "bin": {
+    "grief": "./dist/index.js"
+  }
+}

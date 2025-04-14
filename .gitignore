@@ -1,0 +1,12 @@
+# Builds
+**/*.exe
+
+# Binaries
+**/*.bin
+
+# Object files
+**/*.o
+
+
+
+
