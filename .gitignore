@@ -7,6 +7,17 @@
 # Object files
 **/*.o
 
+# Dist
+dist/
+
+# Node modules
+node_modules/
+
+# Typescript
+tsconfig.tsbuildinfo
+
+
+
 
 
 
