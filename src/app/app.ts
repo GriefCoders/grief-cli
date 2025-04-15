@@ -9,12 +9,9 @@ export class App {
 	private program: Command;
 	private homedir: string;
 
-	private dbPath: string;
-
 	constructor() {
 		this.program = this.initProgram();
 		this.homedir = this.createHomeDir();
-		this.dbPath = this.initDatabase();
 		this.initCommands();
 	}
 
@@ -51,15 +48,5 @@ export class App {
 		}
 
 		return homedir;
-	}
-
-	private initDatabase() {
-		const dbPath = path.join(this.homedir, 'db.json');
-
-		if (!fs.existsSync(dbPath)) {
-			fs.writeFileSync(dbPath, '');
-		}
-
-		return dbPath;
 	}
 }
