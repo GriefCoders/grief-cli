@@ -4,6 +4,7 @@
   "scripts": {
     "start": "tsx src/index.ts",
     "build": "tsc",
+    "pkg": "npm run build && npm run update && npm link && cls",
     "update": "npm i up ."
   },
   "keywords ": [],

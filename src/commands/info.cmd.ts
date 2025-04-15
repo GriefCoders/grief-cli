@@ -4,6 +4,7 @@ import fs from 'fs/promises';
 
 export class InfoCommand extends BaseCommand {
 	public name = 'info';
+	public alias = 'i';
 	public description = 'Get information about the current project';
 
 	public async action() {

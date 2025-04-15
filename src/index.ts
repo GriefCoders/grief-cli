@@ -31,6 +31,7 @@ class Bootstrap {
 		for (const command of COMMANDS) {
 			this.program
 				.command(command.name)
+				.alias(command.alias)
 				.description(command.description)
 				.action(command.action.bind(command));
 		}
