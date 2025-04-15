@@ -1,6 +1,7 @@
 import { PROJECT_TYPES } from '../constants/project-types.const';
 import { BaseCommand } from './command.base';
 import fs from 'fs/promises';
+import os from 'os';
 
 export class InfoCommand extends BaseCommand {
 	public name = 'info';
