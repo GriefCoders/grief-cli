@@ -1,17 +1,42 @@
 #!/usr/bin/env node
 
-import { Command } from "commander";
+import { Command } from 'commander';
+import { APP_SETTINGS } from '@constants/app-settings.const';
+import { COMMANDS } from '@constants/commands.const';
 
-const program = new Command();
+class Bootstrap {
+	private program: Command;
 
-program.name("grief").description("CLI description").version("1.0.0");
+	constructor() {
+		this.program = this.initProgram();
+		this.initCommands();
+	}
 
-program
-  .command("hello")
-  .description("Say hello")
-  .argument("<n>", "name to say hello to")
-  .action((name) => {
-    console.log(`Hello, ${name}!`);
-  });
+	public run() {
+		this.program.parse();
+	}
 
-program.parse();
+	private initProgram() {
+		const program = new Command();
+
+		program
+			.name(APP_SETTINGS.APP_NAME)
+			.description(APP_SETTINGS.APP_DESCRIPTION)
+			.version(APP_SETTINGS.APP_VERSION);
+
+		return program;
+	}
+
+	private initCommands() {
+		for (const command of COMMANDS) {
+			this.program
+				.command(command.name)
+				.description(command.description)
+				.action(command.action.bind(this));
+		}
+	}
+}
+
+const bootstrap = new Bootstrap();
+
+bootstrap.run();
