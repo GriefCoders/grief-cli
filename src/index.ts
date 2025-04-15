@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 
 import { Command } from 'commander';
-import { APP_SETTINGS } from '@constants/app-settings.const';
-import { COMMANDS } from '@constants/commands.const';
+import { APP_SETTINGS } from './constants/app-settings.const';
+import { COMMANDS } from './constants/commands.const';
 
 class Bootstrap {
 	private program: Command;
@@ -32,7 +32,7 @@ class Bootstrap {
 			this.program
 				.command(command.name)
 				.description(command.description)
-				.action(command.action.bind(this));
+				.action(command.action.bind(command));
 		}
 	}
 }
