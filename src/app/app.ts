@@ -13,11 +13,9 @@ export class App {
 
 	constructor() {
 		this.program = this.initProgram();
-		this.homedir = path.join(os.homedir(), `.${APP_SETTINGS.APP_NAME}`);
-		this.dbPath = path.join(this.homedir, 'db.json');
+		this.homedir = this.createHomeDir();
+		this.dbPath = this.initDatabase();
 		this.initCommands();
-		this.createHomeDir();
-		this.initDatabase();
 	}
 
 	public run() {
@@ -46,14 +44,22 @@ export class App {
 	}
 
 	private createHomeDir() {
-		if (!fs.existsSync(this.homedir)) {
-			fs.mkdirSync(this.homedir, { recursive: true });
+		const homedir = path.join(os.homedir(), `.${APP_SETTINGS.APP_NAME}`);
+
+		if (!fs.existsSync(homedir)) {
+			fs.mkdirSync(homedir, { recursive: true });
 		}
+
+		return homedir;
 	}
 
 	private initDatabase() {
-		if (!fs.existsSync(this.dbPath)) {
-			fs.writeFileSync(this.dbPath, '');
+		const dbPath = path.join(this.homedir, 'db.json');
+
+		if (!fs.existsSync(dbPath)) {
+			fs.writeFileSync(dbPath, '');
 		}
+
+		return dbPath;
 	}
 }
