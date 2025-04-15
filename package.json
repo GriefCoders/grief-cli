@@ -3,19 +3,26 @@
   "version": "1.0.0",
   "scripts": {
     "start": "tsx src/index.ts",
-    "build": "tsc"
+    "build": "tsc",
+    "update": "npm i up ."
   },
   "keywords ": [],
   "author": "Maxim Dementyev",
   "license": "ISC",
   "type": "commonjs",
   "description": "",
+  "_moduleAliases": {
+    "@constants": "dist/constants",
+    "@commands": "dist/commands"
+  },
   "dependencies": {
     "@types/prompts": "^2.4.9",
     "commander": "^13.1.0",
-    "prompts": "^2.4.2"
+    "prompts": "^2.4.2",
+    "up": "^1.0.2"
   },
   "devDependencies": {
+    "module-alias": "^2.2.3",
     "tsx": "^4.19.3",
     "typescript": "^5.3.3"
   },
