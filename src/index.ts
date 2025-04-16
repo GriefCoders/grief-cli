@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-import chalk from 'chalk';
+import 'module-alias/register';
 import { App } from './app/app';
 
 async function main() {

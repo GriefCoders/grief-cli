@@ -1,5 +1,5 @@
 import chalk from 'chalk';
-import { BaseError } from './base.error';
+import { BaseError } from '@errors/base.error';
 
 export class Error extends BaseError {
 	constructor(message: string) {

@@ -1,11 +1,10 @@
-import { NodejsParser } from '../parsers/scripts/nodejs.parser';
-import { PROJECT_TYPES } from '../constants/project-types.const';
-import { BaseCommand } from './command.base';
+import { PROJECT_TYPES } from '@constants/project-types.const';
+import { BaseCommand } from '@commands/command.base';
 import fs from 'fs/promises';
-import { GolangParser } from '../parsers/scripts/golang.parser';
-import { BaseParser } from '../parsers/scripts/base.parser';
-import inquirer from 'inquirer';
-import { Warning } from '../errors/warning';
+import { GolangParser } from '@parsers/scripts/golang.parser';
+import { BaseParser } from '@parsers/scripts/base.parser';
+import { Warning } from '@errors/warning';
+import { NodejsParser } from '@parsers/scripts/nodejs.parser';
 
 export class InfoCommand extends BaseCommand {
 	public name = 'info';

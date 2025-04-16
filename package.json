@@ -5,7 +5,9 @@
     "start": "tsx src/index.ts",
     "build": "tsc",
     "pkg": "npm run build && npm run update && npm link && cls",
-    "update": "npm i up ."
+    "update": "npm i up .",
+    "lint": "eslint . --ext .ts",
+    "lint:fix": "eslint . --ext .ts --fix"
   },
   "keywords ": [],
   "author": "Maxim Dementyev",
@@ -14,17 +16,23 @@
   "description": "",
   "_moduleAliases": {
     "@constants": "dist/constants",
-    "@commands": "dist/commands"
+    "@commands": "dist/commands",
+    "@errors": "dist/errors",
+    "@parsers": "dist/parsers"
   },
   "dependencies": {
     "@types/prompts": "^2.4.9",
     "chalk": "^4.1.2",
     "commander": "^13.1.0",
     "inquirer": "^12.5.2",
+    "module-alias": "^2.2.3",
     "up": "^1.0.2"
   },
   "devDependencies": {
-    "module-alias": "^2.2.3",
+    "@types/module-alias": "^2.0.4",
+    "@typescript-eslint/eslint-plugin": "^5.62.0",
+    "@typescript-eslint/parser": "^5.62.0",
+    "eslint": "^8.56.0",
     "tsx": "^4.19.3",
     "typescript": "^5.3.3"
   },
