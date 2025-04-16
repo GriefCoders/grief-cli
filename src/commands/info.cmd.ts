@@ -1,7 +1,11 @@
+import { NodejsParser } from '../parsers/scripts/nodejs.parser';
 import { PROJECT_TYPES } from '../constants/project-types.const';
 import { BaseCommand } from './command.base';
 import fs from 'fs/promises';
-import os from 'os';
+import { GolangParser } from '../parsers/scripts/golang.parser';
+import { BaseParser } from '../parsers/scripts/base.parser';
+import inquirer from 'inquirer';
+import { Warning } from '../errors/warning';
 
 export class InfoCommand extends BaseCommand {
 	public name = 'info';
@@ -13,7 +17,9 @@ export class InfoCommand extends BaseCommand {
 
 		const projectType = this.defineProjectType(files);
 
-		console.log(projectType);
+		const scripts = this.getProjectScripts(files, projectType);
+
+		console.log(scripts);
 	}
 
 	private defineProjectType(files: string[]): PROJECT_TYPES {
@@ -23,6 +29,31 @@ export class InfoCommand extends BaseCommand {
 		];
 
 		const foundRule = rules.find((rule) => files.includes(rule.file));
-		return foundRule?.type || PROJECT_TYPES.UNKNOWN;
+		if (!foundRule) {
+			throw new Warning('Project type not found');
+		}
+
+		return foundRule.type;
+	}
+
+	private getProjectScripts(files: string[], projectType: PROJECT_TYPES) {
+		const parser = this.getProjectParser(projectType);
+
+		if (!parser) {
+			return [];
+		}
+
+		return parser.parse(files);
+	}
+
+	private getProjectParser(projectType: PROJECT_TYPES): BaseParser | null {
+		switch (projectType) {
+			case PROJECT_TYPES.NODEJS:
+				return new NodejsParser();
+			case PROJECT_TYPES.GO:
+				return new GolangParser();
+			default:
+				return null;
+		}
 	}
 }

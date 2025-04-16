@@ -1,10 +1,11 @@
 #!/usr/bin/env node
 
+import chalk from 'chalk';
 import { App } from './app/app';
 
-function main() {
+async function main() {
 	const app = new App();
-	app.run();
+	await app.run();
 }
 
 main();

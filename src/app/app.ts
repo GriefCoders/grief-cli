@@ -4,6 +4,8 @@ import { COMMANDS } from '../constants/commands.const';
 import os from 'os';
 import path from 'path';
 import fs from 'fs';
+import chalk from 'chalk';
+import { BaseError } from '../errors/base.error';
 
 export class App {
 	private program: Command;
@@ -15,8 +17,20 @@ export class App {
 		this.initCommands();
 	}
 
-	public run() {
-		this.program.parse();
+	public async run() {
+		try {
+			await this.program.parseAsync();
+		} catch (error: unknown) {
+			this.handleErrors(error);
+		}
+	}
+
+	private handleErrors(error: unknown) {
+		if (error instanceof BaseError) {
+			console.log(error.message);
+		} else {
+			console.log(chalk.red('UNHANDLED ERROR:'), error);
+		}
 	}
 
 	private initProgram() {
