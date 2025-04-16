@@ -1,8 +1,8 @@
 import chalk from 'chalk';
 import { BaseError } from './base.error';
 
-export class Warning extends BaseError {
+export class Error extends BaseError {
 	constructor(message: string) {
-		super(`${chalk.yellow('[WARNING]')} ${message}`);
+		super(`${chalk.red('[ERROR]')} ${message}`);
 	}
 }
