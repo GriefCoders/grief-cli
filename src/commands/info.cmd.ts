@@ -5,6 +5,7 @@ import { GolangParser } from '@parsers/scripts/golang.parser';
 import { BaseParser } from '@parsers/scripts/base.parser';
 import { Warning } from '@errors/warning';
 import { NodejsParser } from '@parsers/scripts/nodejs.parser';
+import { PythonParser } from '@parsers/scripts/python.parser';
 
 export class InfoCommand extends BaseCommand {
 	public name = 'info';
@@ -23,11 +24,20 @@ export class InfoCommand extends BaseCommand {
 
 	private defineProjectType(files: string[]): PROJECT_TYPES {
 		const rules = [
-			{ file: 'package.json', type: PROJECT_TYPES.NODEJS },
-			{ file: 'go.mod', type: PROJECT_TYPES.GO },
+			{
+				file: ['package.json', 'package-lock.json'],
+				type: PROJECT_TYPES.NODEJS,
+			},
+			{ file: ['go.mod'], type: PROJECT_TYPES.GO },
+			{
+				file: ['requirements.txt', 'pyproject.toml', 'uv.lock'],
+				type: PROJECT_TYPES.PYTHON,
+			},
 		];
 
-		const foundRule = rules.find((rule) => files.includes(rule.file));
+		const foundRule = rules.find((rule) =>
+			rule.file.some((file) => files.includes(file)),
+		);
 		if (!foundRule) {
 			throw new Warning('Project type not found');
 		}
@@ -51,6 +61,8 @@ export class InfoCommand extends BaseCommand {
 				return new NodejsParser();
 			case PROJECT_TYPES.GO:
 				return new GolangParser();
+			case PROJECT_TYPES.PYTHON:
+				return new PythonParser();
 			default:
 				return null;
 		}
